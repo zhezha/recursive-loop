@@ -15,10 +15,10 @@ public abstract class RecursiveLoop {
         this.vars = new int[loops.size()];
     }
 
-    public RecursiveLoop(List<List<Integer>> loops, int result) {
+    public RecursiveLoop(List<List<Integer>> loops, int initialResult) {
         this.loops = loops;
         this.vars = new int[loops.size()];
-        this.result = result;
+        this.result = initialResult;
     }
 
     public void loop() {
