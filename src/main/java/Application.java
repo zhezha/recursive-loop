@@ -18,11 +18,34 @@ public class Application {
         loops.add(Arrays.asList(41, 42, 43));
         loops.add(Arrays.asList(51, 52, 53));
 
-        new RecursiveLoop(loops, vars -> handle(vars)).loop();
+        System.out.println("Print loops:");
+        RecursiveLoop printLoop = new RecursiveLoop(loops) {
+            @Override
+            public int handle(int[] vars, int result) {
+                print(vars);
+                return 0;
+            }
+        };
+        printLoop.loop();
+
+        System.out.println("\nCalculate max sum:");
+        RecursiveLoop maxSum = new RecursiveLoop(loops, Integer.MIN_VALUE) {
+            @Override
+            public int handle(int[] vars, int result) {
+                return calculateMaxSum(vars, result);
+            }
+        };
+        maxSum.loop();
+        System.out.println("Max sum: " + maxSum.getResult());
     }
 
-    static void handle(int[] vars) {
+    static void print(int[] vars) {
         Arrays.stream(vars).forEach( e -> System.out.print(e + ", "));
         System.out.println();
+    }
+
+    static int calculateMaxSum(int[] vars, int result) {
+        int currentSum = Arrays.stream(vars).sum();
+        return (result < currentSum) ? currentSum : result;
     }
 }
