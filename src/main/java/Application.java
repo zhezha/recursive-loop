@@ -1,3 +1,5 @@
+import recuresiveloop.MaxSumLoop;
+import recuresiveloop.PrintLoop;
 import recuresiveloop.RecursiveLoop;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        List<List<Integer>> loops = new ArrayList<>();
+        ArrayList<List<Integer>> loops = new ArrayList<>();
         loops.add(Arrays.asList(1, 2, 3));
         loops.add(Arrays.asList(11, 12, 13));
         loops.add(Arrays.asList(21, 22, 23));
@@ -19,33 +21,12 @@ public class Application {
         loops.add(Arrays.asList(51, 52, 53));
 
         System.out.println("Print loops:");
-        RecursiveLoop printLoop = new RecursiveLoop(loops) {
-            @Override
-            public int handle(int[] vars, int result) {
-                print(vars);
-                return 0;
-            }
-        };
+        RecursiveLoop printLoop = new PrintLoop(loops);
         printLoop.loop();
 
         System.out.println("\nCalculate max sum:");
-        RecursiveLoop maxSum = new RecursiveLoop(loops, Integer.MIN_VALUE) {
-            @Override
-            public int handle(int[] vars, int result) {
-                return calculateMaxSum(vars, result);
-            }
-        };
-        maxSum.loop();
-        System.out.println("Max sum: " + maxSum.getResult());
-    }
-
-    static void print(int[] vars) {
-        Arrays.stream(vars).forEach( e -> System.out.print(e + ", "));
-        System.out.println();
-    }
-
-    static int calculateMaxSum(int[] vars, int result) {
-        int currentSum = Arrays.stream(vars).sum();
-        return (result < currentSum) ? currentSum : result;
+        RecursiveLoop maxSumLoop = new MaxSumLoop(loops, Integer.MIN_VALUE);
+        maxSumLoop.loop();
+        System.out.println("Max sum: " + maxSumLoop.getResult());
     }
 }

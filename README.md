@@ -37,6 +37,3 @@ new RecursiveLoop(loops) {
 ```
 
 where `loops` is a list consists of `list1, list2, ..., listn`.
-
-TODO: The loop range could be generalised to `Collection<E>` and variable type
-could be generic type.
